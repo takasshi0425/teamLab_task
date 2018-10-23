@@ -1,79 +1,77 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<title>入社前課題</title>
-</head>
-<body>
 <?php
-/*(ここから)phalcon tutorial */
 
 use Phalcon\Loader;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Application;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Url as UrlProvider;
-use Phalcon\Mvc\Controller;
+use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 
 
-// リソースの特定に役立つ絶対パス定数を定義する
-define('BASE_PATH', dirname(__DIR__));
-define('APP_PATH', BASE_PATH . '/app');
 
-// オートローダーの登録
+// オートローダにディレクトリを登録する
 $loader = new Loader();
 
 $loader->registerDirs(
     [
-        APP_PATH . '/controllers/',
-        APP_PATH . '/models/',
+        "../app/controllers/",
+        "../app/models/",
     ]
     );
 
 $loader->register();
 
-// DIの生成
+
+
+// DIコンテナを作る
 $di = new FactoryDefault();
 
-// ビューコンポーネントの設定
+// ビューのコンポーネントの組み立て
 $di->set(
-'view',
-function () {
-    $view = new View();
-    $view->setViewsDir(APP_PATH . '/views/');
-    return $view;
-}
-);
+    "view",
+    function () {
+        $view = new View();
 
-// ベースURIの設定
+        $view->setViewsDir("../app/views/");
+
+        return $view;
+    }
+    );
+
+// ベースURIを設定して、生成される全てのURIが「t」を含むようにする
 $di->set(
-'url',
-function () {
-    $url = new UrlProvider();
-    $url->setBaseUri('/');
-    return $url;
-}
-);
+    "url",
+    function () {
+        $url = new UrlProvider();
+
+        $url->setBaseUri("/teamLab_task/");
+
+        return $url;
+    }
+    );
+
+// データベースサービスのセットアップ
+$di->set(
+    "db",
+    function () {
+        return new DbAdapter(
+            [
+                "host"     => "localhost",
+                "username" => "root",
+                "password" => "daQwuJzMO6zBHnEI",
+                "dbname"   => "tutorial",
+            ]
+            );
+    }
+    );
 
 $application = new Application($di);
 
 try {
-    // リクエストのハンドリング
+    // リクエストを処理する
     $response = $application->handle();
 
     $response->send();
 } catch (\Exception $e) {
-    echo 'Exception: ', $e->getMessage();
+    echo "Exception: ", $e->getMessage();
 }
-/*(ここまで) phalcon tutorial*/
-
-class dat{
-    public $image;
-    public $name;
-    public $explanation;
-    public $price;
-}
-?>
-
-</body>
-</html>
