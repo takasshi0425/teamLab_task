@@ -6,21 +6,24 @@
 
     <p>
         <label for="name">
-            Name
+            商品タイトル
         </label>
-
-        <?php echo $this->tag->textField("name"); ?>
+<input type="text" name="name" maxlength="100" size="50">
     </p>
 
     <p>
-        <label for="email">
-            E-Mail
+        <label for="exp">
+            説明文
         </label>
-
-        <?php echo $this->tag->textField("email"); ?>
+<textarea name="exp" maxlength="500" cols="50" rows="5"></textarea>
     </p>
 
-
+    <p>
+        <label for="price">
+            価格
+        </label>
+<input type="text" name="price" maxlength="100" size="50">
+    </p>
 
     <p>
         <?php echo $this->tag->submitButton("Register"); ?>

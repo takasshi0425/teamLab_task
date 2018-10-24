@@ -18,7 +18,8 @@ class SignupController extends Controller
             $this->request->getPost(),
             [
                 "name",
-                "email",
+                "exp",
+                "price",
             ]
             );
 

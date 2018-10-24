@@ -59,7 +59,7 @@ $di->set(
                 "host"     => "localhost",
                 "username" => "root",
                 "password" => "daQwuJzMO6zBHnEI",
-                "dbname"   => "tutorial",
+                "dbname"   => "product",
             ]
             );
     }
