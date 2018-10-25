@@ -18,7 +18,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 );
 ```
-**Implementation of "image" has not been done yet.**
+**Implementation of "Product's Image" has not been done yet.**
 # The Author
 Takashi Yamada
 # LICENSE
