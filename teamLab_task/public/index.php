@@ -1,6 +1,7 @@
 <?php
 
 use Phalcon\Loader;
+use Phalcon\Mvc\Micro;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Application;
 use Phalcon\Di\FactoryDefault;
@@ -38,7 +39,7 @@ $di->set(
     }
     );
 
-// ベースURIを設定して、生成される全てのURIが「t」を含むようにする
+// ベースURIを設定して、生成される全てのURIが「teamLab_task」を含むようにする
 $di->set(
     "url",
     function () {
@@ -60,6 +61,9 @@ $di->set(
                 "username" => "root",
                 "password" => "daQwuJzMO6zBHnEI",
                 "dbname"   => "product",
+                "options" => array(
+                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
+                )
             ]
             );
     }
