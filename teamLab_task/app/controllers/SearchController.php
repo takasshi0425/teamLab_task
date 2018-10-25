@@ -10,7 +10,7 @@ class SearchController extends Controller
 
     public function resultAction()
     {
-        $app->get(
+       /* $app->get(
             '/search/{name}',
             function ($name) use ($app) {
                 $phql = 'SELECT * FROM app\contotollers\users WHERE name LIKE :name: ORDER BY name';
@@ -35,6 +35,7 @@ class SearchController extends Controller
 
                 echo json_encode($data);
             }
-            );
+            );*/
+        echo "エラー起きてます";
     }
 }
