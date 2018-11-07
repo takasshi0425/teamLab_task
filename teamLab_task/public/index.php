@@ -6,7 +6,8 @@ use Phalcon\Mvc\View;
 use Phalcon\Mvc\Application;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Url as UrlProvider;
-use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
+use Phalcon\Db\Adapter\Pdo\Mysql as PdoMysql;
+use Phalcon\Http\Response;
 
 
 
@@ -17,12 +18,12 @@ $loader->registerNamespaces(
         'Store\Products' => __DIR__ . '/models/',
     ]
     );
-$loader->registerDirs(
+/*$loader->registerDirs(
     [
         "../app/controllers/",
         "../app/models/",
     ]
-    );
+    );*/
 
 $loader->register();
 
@@ -32,7 +33,7 @@ $loader->register();
 $di = new FactoryDefault();
 
 // ビューのコンポーネントの組み立て
-$di->set(
+/*$di->set(
     "view",
     function () {
         $view = new View();
@@ -53,13 +54,13 @@ $di->set(
 
         return $url;
     }
-    );
+    );*/
 
 // データベースサービスのセットアップ
 $di->set(
     "db",
     function () {
-        return new DbAdapter(
+        return new PdoMysql(
             [
                 "host"     => "localhost",
                 "username" => "root",
@@ -72,7 +73,7 @@ $di->set(
             );
     }
     );
-
+/*
 $application = new Application($di);
 
 try {
@@ -83,13 +84,14 @@ try {
 } catch (\Exception $e) {
     echo "Exception: ", $e->getMessage();
 }
+*/
 
 $app = new Micro($di);
 
 // 全ての users を取得
 $app->get(
     '/api/users',
-    function () {
+    function () use ($app){
         // 全 usert を取得する操作
         $phql = 'SELECT * FROM Store\Products\Users ORDER BY name';
 
@@ -107,15 +109,15 @@ $app->get(
 
         echo json_encode($data);
     }
-    );
+);
 
 
 // 名前が $name である userを検索
 $app->get(
     '/api/users/search/{name}',
-    function ($name) {
+    function ($name)use ($app) {
         // 名前が $name である userを検索する操作
-        $phql = 'SELECT * FROM StoreProducts\Users WHERE name LIKE :name: ORDER BY name';
+        $phql = 'SELECT * FROM Store\Products\Users WHERE name LIKE :name: ORDER BY name';
 
         $users = $app->modelsManager->executeQuery(
             $phql,
@@ -137,14 +139,14 @@ $app->get(
 
         echo json_encode($data);
     }
-    );
+);
 
 // プライマリーキーで userを指定して取得
 $app->get(
     '/api/users/{id:[0-9]+}',
-    function ($id) {
+    function ($id)use ($app) {
         // プライマリーキーが $idの userを指定して取得する操作
-        $phql = 'SELECT * FROM Store\Producs\Users WHERE id = :id:';
+        $phql = 'SELECT * FROM Store\Products\Users WHERE id = :id:';
 
         $user = $app->modelsManager->executeQuery(
             $phql,
@@ -180,18 +182,10 @@ $app->get(
     }
     );
 
-// 新しいrobotの追加
-$app->post(
-    '/api/users',
-    function () {
-        // 新しいuserを追加する操作
-    }
-    );
-
 // プライマリーキーで指定したuserを更新する
 $app->put(
     '/api/users/{id:[0-9]+}',
-    function ($id) {
+    function ($id)use ($app) {
         // プライマリーキーが $id のuserを更新する
         $user = $app->request->getJsonRawBody();
 
@@ -211,7 +205,7 @@ $app->put(
         $response = new Response();
 
         // この挿入が成功したか確認する
-        if ($status->success() === true) {
+    if ($status->success() === true) {
             $response->setJsonContent(
                 [
                     'status' => 'OK'
@@ -242,7 +236,7 @@ $app->put(
 // プライマリーキーで指定したuserを削除する
 $app->delete(
     '/api/users/{id:[0-9]+}',
-    function ($id) {
+    function ($id)use ($app) {
         // プライマリーキーが $id のuserを削除する
         $phql = 'DELETE FROM Store\Products\Users WHERE id = :id:';
 
