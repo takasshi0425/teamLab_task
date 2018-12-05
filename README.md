@@ -20,15 +20,15 @@ CREATE TABLE `users` (
 ```
 **Implementation of "Product's Image" has not been done yet.**
 # Methods
-Show List
+Show List<br>
 http://localhost/teamLab_task_Version1/api/users/get (GET)
-Resist
+<br>Resist<br>
 http://localhost/teamLab_task_Version1/api/users/ (POST)
-Search
+<br>Search<br>
 http://localhost/teamLab_task_Version1/api/users/search/{name}(GET)
-Update
+<br>Update<br>
 http://localhost/teamLab_task_Version1/api/users/{id:[0-9]+} (PUT)
-Delete
+<br>Delete<br>
 http://localhost/teamLab_task_Version1/api/users/{id:[0-9]+} (DELETE)
 # The Author
 Takashi Yamada
