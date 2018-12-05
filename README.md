@@ -12,9 +12,9 @@ Database:Mysql
 ```
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `exp` varchar(500) NOT NULL,
-  `price` varchar(20) NOT NULL,
+  `name` nchar varying(100) NOT NULL,
+  `exp` nchar varying(500) NOT NULL,
+  `price` int(20) NOT NULL,
   PRIMARY KEY (`id`)
 );
 ```
