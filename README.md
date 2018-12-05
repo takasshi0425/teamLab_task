@@ -25,7 +25,7 @@ http://localhost/teamLab_task_Version1/api/users/get (GET)
 <br>Resist<br>
 http://localhost/teamLab_task_Version1/api/users/ (POST)
 <br>Search<br>
-http://localhost/teamLab_task_Version1/api/users/search/{name}(GET)
+http://localhost/teamLab_task_Version1/api/users/search/{name} (GET)
 <br>Update<br>
 http://localhost/teamLab_task_Version1/api/users/{id:[0-9]+} (PUT)
 <br>Delete<br>
