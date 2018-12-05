@@ -19,6 +19,17 @@ CREATE TABLE `users` (
 );
 ```
 **Implementation of "Product's Image" has not been done yet.**
+# Methods
+Show List
+http://localhost/teamLab_task_Version1/api/users/get (GET)
+Resist
+http://localhost/teamLab_task_Version1/api/users/ (POST)
+Search
+http://localhost/teamLab_task_Version1/api/users/search/{name}(GET)
+Update
+http://localhost/teamLab_task_Version1/api/users/{id:[0-9]+} (PUT)
+Delete
+http://localhost/teamLab_task_Version1/api/users/{id:[0-9]+} (DELETE)
 # The Author
 Takashi Yamada
 # LICENSE
