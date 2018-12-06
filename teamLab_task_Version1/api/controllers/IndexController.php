@@ -40,6 +40,12 @@ class IndexController extends ControllerBase{
         // レスポンスの作成
         $response = new Response();
 
+        //画像保存(画像はbase64形式)
+        $image_file = __DIR__;
+        $image_file = str_replace("controllers", "images", $image_file);
+        $image_file = $image_file."/".($status->getModel()->id).".dat";
+        $image_file = file_put_contents($image_file, $user->image);
+
         // 挿入が成功したかを確認
         if ($status->success() === true) {
             // HTTPステータスの変更
@@ -89,11 +95,20 @@ class IndexController extends ControllerBase{
         $data = [];
 
         foreach ($users as $user) {
+            $image_file = __DIR__;
+            $image_file = str_replace("controllers", "images", $image_file);
+            $image = file_get_contents($image_file."/".($user->id).".dat");
+
+            if($image == false){
+                $image = "No image.";
+            }
+
             $data[] = [
                 'id'   => $user->id,
                 'name' => $user->name,
                 'exp'  => $user->exp,
                 'price'=> $user->price,
+                'image'=> $image,
             ];
         }
         echo json_encode($data);
@@ -114,6 +129,12 @@ class IndexController extends ControllerBase{
                 'price'=> $user->price,
             ]
             );
+
+        //画像更新(画像はbase64形式)
+        $image_file = __DIR__;
+        $image_file = str_replace("controllers", "images", $image_file);
+        $image_file = $image_file."/".($id).".dat";
+        $image_file = file_put_contents($image_file, $user->image);
 
         // レスポンスの作成
         $response = new Response();
