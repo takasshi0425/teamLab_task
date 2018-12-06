@@ -18,7 +18,6 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 );
 ```
-**Implementation of "Product's Image" has not been done yet.**
 # Methods
 Show List<br>
 http://localhost/teamLab_task_Version1/api/users/get (GET)
@@ -35,4 +34,4 @@ Takashi Yamada
 # LICENSE
 This software is released under the MIT License, see LICENSE.
 # RELEASED
-# RELEASED SCHEDULE
+2018/12/06
